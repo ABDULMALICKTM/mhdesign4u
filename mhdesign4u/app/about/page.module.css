@@ -1,0 +1,150 @@
+.page {
+  padding-top: 160px;
+}
+
+.section {
+  padding: 100px 0;
+}
+
+.hero {
+  padding-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.heroTitle {
+  font-size: clamp(36px, 6vw, 72px);
+  max-width: 820px;
+}
+
+.heroLead {
+  max-width: 620px;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* ---- PRIS-M section ---- */
+.orbSection {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 60px;
+  align-items: center;
+  padding: 100px 0;
+}
+
+@media (max-width: 900px) {
+  .orbSection {
+    grid-template-columns: 1fr;
+  }
+}
+
+.orbCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.orbTitle {
+  font-size: clamp(30px, 4vw, 46px);
+}
+
+.orbText {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 460px;
+}
+
+.orbViewport {
+  width: 100%;
+}
+
+/* ---- Section head shared ---- */
+.sectionHead {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 52px;
+}
+
+.sectionTitle {
+  font-size: clamp(28px, 4vw, 44px);
+  max-width: 620px;
+}
+
+/* ---- Timeline ---- */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.milestone {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 28px;
+  padding: 32px 36px;
+  align-items: start;
+}
+
+@media (max-width: 640px) {
+  .milestone {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+.milestoneYear {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  color: var(--accent-cyan);
+}
+
+.milestoneTitle {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.milestoneText {
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 560px;
+}
+
+/* ---- Values ---- */
+.valuesPanel {
+  padding: 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 34px;
+}
+
+@media (max-width: 720px) {
+  .valuesPanel {
+    padding: 34px 24px;
+  }
+}
+
+.valuesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+@media (max-width: 820px) {
+  .valuesGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.value h4 {
+  font-size: 17px;
+  margin-bottom: 10px;
+}
+
+.value p {
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.6;
+}

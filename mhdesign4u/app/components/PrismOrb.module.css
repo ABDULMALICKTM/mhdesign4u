@@ -1,0 +1,82 @@
+.viewport {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-glass);
+  background:
+    radial-gradient(circle at 50% 40%, rgba(124, 92, 255, 0.12), transparent 60%),
+    var(--surface-glass);
+  overflow: hidden;
+}
+
+.heroScale {
+  width: 100%;
+  height: 100%;
+}
+
+.fullScale {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 34px 34px;
+  mask-image: radial-gradient(circle at center, black 40%, transparent 78%);
+}
+
+.orb {
+  position: relative;
+  width: 46%;
+  aspect-ratio: 1 / 1;
+  border-radius: 46% 54% 60% 40% / 50% 45% 55% 50%;
+  background: var(--grad-prism);
+  box-shadow:
+    0 0 90px rgba(124, 92, 255, 0.45),
+    inset 0 0 60px rgba(255, 255, 255, 0.25);
+  filter: saturate(1.15);
+  will-change: transform, border-radius;
+}
+
+.core {
+  position: absolute;
+  inset: 14%;
+  border-radius: inherit;
+  background: rgba(7, 7, 10, 0.55);
+  backdrop-filter: blur(6px);
+}
+
+.sheen {
+  position: absolute;
+  top: 8%;
+  left: 14%;
+  width: 40%;
+  height: 30%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+  filter: blur(18px);
+  opacity: 0.6;
+}
+
+.tag {
+  position: absolute;
+  bottom: 20px;
+  left: 24px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+}
+
+.tag em {
+  font-style: normal;
+  color: var(--text-muted);
+}

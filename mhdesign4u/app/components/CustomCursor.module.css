@@ -1,0 +1,74 @@
+.cursorLayer {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+}
+
+@media (hover: none) {
+  .cursorLayer {
+    display: none;
+  }
+}
+
+.dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  z-index: 2;
+}
+
+.ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  border-radius: 50%;
+  border: 1px solid var(--border-glass-strong);
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: width 0.25s var(--ease-prism), height 0.25s var(--ease-prism),
+    margin 0.25s var(--ease-prism), background 0.25s var(--ease-prism),
+    border-color 0.25s var(--ease-prism);
+}
+
+.ring[data-state="magnetic"] {
+  width: 64px;
+  height: 64px;
+  margin: -32px 0 0 -32px;
+  border-color: var(--accent-violet);
+  background: rgba(124, 92, 255, 0.08);
+}
+
+.ring[data-state="view"],
+.ring[data-state="drag"] {
+  width: 84px;
+  height: 84px;
+  margin: -42px 0 0 -42px;
+  border-color: var(--accent-cyan);
+  background: rgba(52, 224, 216, 0.08);
+}
+
+.ring.pressed {
+  width: 34px;
+  height: 34px;
+  margin: -17px 0 0 -17px;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
