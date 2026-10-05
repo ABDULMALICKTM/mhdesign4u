@@ -1,235 +1,40 @@
-"use client";
+import Link from 'next/link'
 
-import { useEffect, useRef } from "react";
-import Link from "next/link";
-import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
-import styles from "./page.module.css";
-import PrismOrb from "./components/PrismOrb";
-import TiltCard from "./components/TiltCard";
-import { services, sectors } from "./lib/servicesData";
+const projects = [
+  { n:'01', title:'ReachStream', desc:'Evolving a complex B2B data platform across multiple product generations.', tags:'B2B SaaS · Product Design · UX/UI', href:'/work/reachstream', tone:'dark' },
+  { n:'02', title:'DataCaptive', desc:'Making data-heavy workflows easier to understand, navigate and act on.', tags:'Data Product · Dashboard · UX', href:'#work', tone:'light' },
+  { n:'03', title:'EasyGTM / ICPro', desc:'Designing complex B2B workflows across dashboards and business tools.', tags:'Enterprise UX · Workflow · UI', href:'#work', tone:'warm' },
+  { n:'04', title:'Archea', desc:'A premium digital experience taken from product design to a live website.', tags:'Web · UI/UX · Prototype', href:'https://archea.co.in/', tone:'dark' },
+  { n:'05', title:'F5 Services', desc:'Design → build: a responsive Framer experience delivered to production.', tags:'Framer · Design + Build · Web', href:'https://f5services.com/', tone:'light' },
+]
 
-export default function HomePage() {
-  const rootRef = useRef(null);
-  const rowARef = useRef(null);
-  const rowBRef = useRef(null);
-  const heroRef = useRef(null);
+function ProjectVisual({tone}) {
+  return <div className={'project-visual '+tone}>
+    <div className="visual-window"><div className="dots"><i/><i/><i/></div><div className="visual-grid"><div className="v-sidebar"/><div className="v-main"><div className="v-title"/><div className="v-cards"><span/><span/><span/></div><div className="v-chart"><b/><b/><b/><b/><b/><b/><b/></div></div></div></div>
+  </div>
+}
 
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-    const ctx = gsap.context(() => {
-      // ---- Intro reveal ----------------------------------------------
-      const introTl = gsap.timeline({ defaults: { ease: "power4.out" } });
-      introTl
-        .from(`.${styles.eyebrowIn}`, { y: 20, opacity: 0, duration: 0.7 })
-        .from(
-          `.${styles.rowInner}`,
-          { yPercent: 110, duration: 1.1, stagger: 0.08 },
-          "-=0.35"
-        )
-        .from(`.${styles.heroSub}`, { y: 24, opacity: 0, duration: 0.8 }, "-=0.5")
-        .from(`.${styles.heroActions} > *`, { y: 18, opacity: 0, duration: 0.6, stagger: 0.08 }, "-=0.5")
-        .from(`.${styles.heroOrbWrap}`, { scale: 0.85, opacity: 0, duration: 1 }, "-=0.9");
+export default function Home(){
+ return <main>
+  <header className="nav wrap"><Link href="/" className="brand">MALICK<span>.</span></Link><nav><a href="#work">Work</a><a href="#services">Services</a><a href="#about">About</a><a href="#contact">Contact</a></nav><a className="resume" href="mailto:hello@mhdesign4u.com">Let's work <span>↗</span></a></header>
 
-      // ---- Kinetic header: rows skew/slide opposite directions --------
-      gsap.to(rowARef.current, {
-        xPercent: -14,
-        skewX: -4,
-        ease: "none",
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 0.6,
-        },
-      });
-      gsap.to(rowBRef.current, {
-        xPercent: 14,
-        skewX: 4,
-        ease: "none",
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 0.6,
-        },
-      });
+  <section className="hero wrap">
+    <div className="eyebrow"><span className="status"/> AVAILABLE FOR SELECTED OPPORTUNITIES</div>
+    <h1>I turn complex<br/><em>products</em> into clear<br/>experiences.</h1>
+    <div className="hero-bottom"><p>Senior Product Designer · UX Engineer<br/>7+ years · B2B SaaS · UX/UI · Design Systems · Web</p><a className="circle-btn" href="#work">↓</a><p className="hero-note">Based in Bengaluru, India<br/>Remote · International</p></div>
+  </section>
 
-      // ---- Generic scroll reveals for sections -------------------------
-      gsap.utils.toArray(`.${styles.reveal}`).forEach((el) => {
-        gsap.from(el, {
-          y: 48,
-          opacity: 0,
-          duration: 0.9,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: el,
-            start: "top 82%",
-          },
-        });
-      });
+  <section className="proof"><div className="wrap proof-grid"><div><strong>7+</strong><span>YEARS<br/>EXPERIENCE</span></div><div><strong>B2B</strong><span>SAAS &<br/>ENTERPRISE</span></div><div><strong>DESIGN</strong><span>→ BUILD<br/>WORKFLOW</span></div><div><strong>WEB</strong><span>FRAMER<br/>WORDPRESS</span></div></div></section>
 
-      // ---- Stat counters -------------------------------------------
-      gsap.utils.toArray(`.${styles.statValue}`).forEach((el) => {
-        const target = Number(el.dataset.count);
-        const counter = { val: 0 };
-        gsap.to(counter, {
-          val: target,
-          duration: 1.6,
-          ease: "power2.out",
-          scrollTrigger: { trigger: el, start: "top 85%" },
-          onUpdate: () => {
-            el.textContent = Math.round(counter.val).toString();
-          },
-        });
-      });
+  <section id="work" className="work wrap section"><div className="section-head"><div><span className="kicker">SELECTED WORK</span><h2>Work that solves<br/>real problems.</h2></div><p>Five projects selected to show product thinking, systems thinking and the ability to take design closer to production.</p></div>
+    <div className="projects">{projects.map(p=><article className="project" key={p.title}><div className="project-meta"><span>{p.n}</span><span>{p.tags}</span></div><ProjectVisual tone={p.tone}/><div className="project-copy"><div><h3>{p.title}</h3><p>{p.desc}</p></div><a href={p.href}>{p.href.startsWith('http')?'Live project':'Read case study'} <span>↗</span></a></div></article>)}</div>
+  </section>
 
-      // ---- Sector marquee, continuous horizontal drift ---------------
-      const marquee = document.querySelector(`.${styles.marqueeTrack}`);
-      if (marquee) {
-        gsap.to(marquee, {
-          xPercent: -50,
-          duration: 26,
-          ease: "none",
-          repeat: -1,
-        });
-      }
-    }, rootRef);
+  <section id="services" className="services section"><div className="wrap"><span className="kicker">SERVICES</span><div className="service-intro"><h2>A senior designer<br/><em>without the overhead.</em></h2><p>I help startups, businesses and product teams turn messy ideas into clear, production-ready digital experiences.</p></div><div className="service-grid"><div><span>01</span><h3>Product Design</h3><p>UX strategy, information architecture, user flows, wireframes, UI, prototyping and design systems.</p></div><div><span>02</span><h3>SaaS & B2B</h3><p>Dashboards, data products, enterprise workflows, admin platforms and AI product experiences.</p></div><div><span>03</span><h3>Web Experience</h3><p>SaaS websites, landing pages, conversion-focused redesigns, Framer and WordPress.</p></div><div><span>04</span><h3>Design → Build</h3><p>Figma to responsive implementation with Framer, WordPress, HTML and CSS.</p></div></div></div></section>
 
-    return () => ctx.revert();
-  }, []);
+  <section id="about" className="about wrap section"><div><span className="kicker">ABOUT</span><h2>I design.<br/>I build.<br/><em>I simplify.</em></h2></div><div className="about-copy"><p className="lead">I'm Malick — a Senior Product Designer and UX Engineer with 7+ years of experience across digital products, SaaS platforms, dashboards, websites and brand experiences.</p><p>My work sits between product thinking, UX, visual design and technology. I enjoy complex workflows, messy information, legacy interfaces and products that need to become simpler without losing power.</p><div className="pill-list"><span>Product thinking</span><span>Figma</span><span>Web</span><span>AI-assisted workflow</span></div></div></section>
 
-  return (
-    <div ref={rootRef} className={styles.page}>
-      {/* ============================= HERO ============================= */}
-      <section ref={heroRef} className={styles.hero}>
-        <div className={`shell ${styles.heroShell}`}>
-          <span className={`eyebrow ${styles.eyebrowIn}`}>
-            Bangalore, India — Est. 2018
-          </span>
-
-          <h1 className={styles.kinetic} aria-label="mhdesign4u — design & development studio">
-            <span ref={rowARef} className={styles.kineticRow}>
-              <span className={styles.rowInner}>mhdesign</span>
-            </span>
-            <span ref={rowBRef} className={`${styles.kineticRow} ${styles.rowAlt}`}>
-              <span className={styles.rowInner}>4u&nbsp;studio</span>
-            </span>
-          </h1>
-
-          <p className={`${styles.heroSub}`}>
-            A Bangalore design & development studio building interfaces for
-            banking, healthcare, HR and commerce teams who can&apos;t afford a
-            confusing screen — since 2018.
-          </p>
-
-          <div className={styles.heroActions}>
-            <Link href="/calculator" className={styles.primaryBtn} data-cursor="magnetic">
-              Estimate a project
-            </Link>
-            <Link href="/about" className={styles.secondaryBtn} data-cursor="magnetic">
-              Meet PRIS-M
-            </Link>
-          </div>
-        </div>
-
-        <div className={styles.heroOrbWrap} data-cursor="view">
-          <PrismOrb size="hero" />
-        </div>
-      </section>
-
-      {/* ============================= MANIFESTO ============================= */}
-      <section className={`shell ${styles.section}`}>
-        <div className={`glass ${styles.manifesto} ${styles.reveal}`}>
-          <span className="eyebrow">What we believe</span>
-          <p className={styles.manifestoText}>
-            Most agencies decorate a product after it&apos;s built. We architect
-            it — research, structure, and interface as one continuous system —
-            so the thing you ship still makes sense at feature two hundred.
-          </p>
-          <div className={styles.statRow}>
-            <div className={styles.stat}>
-              <span className={styles.statValue} data-count="2018">2018</span>
-              <span className={styles.statLabel}>Founded in Bangalore</span>
-            </div>
-            <div className={styles.stat}>
-              <span className={styles.statValue} data-count="120">0</span>
-              <span className={styles.statLabel}>Projects shipped</span>
-            </div>
-            <div className={styles.stat}>
-              <span className={styles.statValue} data-count="7">0</span>
-              <span className={styles.statLabel}>Sectors served</span>
-            </div>
-            <div className={styles.stat}>
-              <span className={styles.statValue} data-count="5">0</span>
-              <span className={styles.statLabel}>Core disciplines</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ============================= SECTORS MARQUEE ============================= */}
-      <section className={styles.section}>
-        <div className={`shell ${styles.sectionHead} ${styles.reveal}`}>
-          <span className="eyebrow">Sectors we serve</span>
-          <h2 className={styles.sectionTitle}>
-            Regulated, complex, and detail-heavy industries.
-          </h2>
-          <Link href="/sectors" className={styles.textLink} data-cursor="magnetic">
-            View sector grid →
-          </Link>
-        </div>
-
-        <div className={styles.marqueeMask}>
-          <div className={styles.marqueeTrack}>
-            {[...sectors, ...sectors].map((s, i) => (
-              <span key={`${s.slug}-${i}`} className={styles.marqueeItem}>
-                {s.name}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ============================= SERVICES GRID ============================= */}
-      <section className={`shell ${styles.section}`}>
-        <div className={`${styles.sectionHead} ${styles.reveal}`}>
-          <span className="eyebrow">What we do</span>
-          <h2 className={styles.sectionTitle}>Five disciplines, one system.</h2>
-        </div>
-
-        <div className={`${styles.servicesGrid} ${styles.reveal}`}>
-          {services.map((service) => (
-            <Link key={service.slug} href={`/services/${service.slug}`} data-cursor="view">
-              <TiltCard accent={service.color} className={styles.serviceCard}>
-                <span className={styles.serviceIndex}>{service.heroStat.value}</span>
-                <h3 className={styles.serviceName}>{service.name}</h3>
-                <p className={styles.serviceShort}>{service.short}</p>
-                <span className={styles.serviceArrow}>Explore →</span>
-              </TiltCard>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* ============================= CTA ============================= */}
-      <section className={`shell ${styles.section}`}>
-        <div className={`glass ${styles.ctaPanel} ${styles.reveal}`}>
-          <h2 className={styles.ctaTitle}>Get a scoped estimate in two minutes.</h2>
-          <p className={styles.ctaSub}>
-            Pick a service and tier, and our calculator gives you a live number
-            — no forms, no follow-up call required to see a range.
-          </p>
-          <Link href="/calculator" className={styles.primaryBtn} data-cursor="magnetic">
-            Open the calculator
-          </Link>
-        </div>
-      </section>
-
-      <footer className={`shell ${styles.footer}`}>
-        <span>mhdesign4u © {new Date().getFullYear()} — Bangalore, India</span>
-        <span>Founded 2018</span>
-      </footer>
-    </div>
-  );
+  <section id="contact" className="contact"><div className="wrap"><span className="kicker">LET'S WORK</span><h2>Have a complex<br/><em>product problem?</em></h2><a className="big-link" href="mailto:hello@mhdesign4u.com">Start a conversation <span>↗</span></a><div className="contact-foot"><span>hello@mhdesign4u.com</span><span>Bengaluru · India</span><span>Remote · Worldwide</span></div></div></section>
+  <footer className="wrap footer"><span>© 2026 Malick</span><div><a href="https://www.linkedin.com/">LinkedIn</a><a href="https://www.behance.net/">Behance</a><a href="https://www.figma.com/">Figma</a></div></footer>
+ </main>
 }
