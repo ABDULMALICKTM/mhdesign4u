@@ -1,0 +1,14 @@
+html{scroll-behavior:auto;scroll-padding-top:90px}
+.motion-progress{position:fixed;z-index:99;left:0;top:0;height:2px;width:100%;background:#c29a45;transform:scaleX(0);transform-origin:left;pointer-events:none}
+.reveal{opacity:0;transform:translateY(28px);filter:blur(4px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1),filter .85s}
+.reveal.in-view{opacity:1;transform:none;filter:none}
+.hero{min-height:calc(100svh - 20px);position:relative;isolation:isolate}
+.hero:before{content:"";position:absolute;inset:0 -6%;z-index:-1;background:linear-gradient(90deg,#0e2219e8 0%,#0e221980 55%,#0e221930 100%),url("https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=2000&q=90") center/cover;transform:scale(1.04);will-change:transform}
+.hero h1{animation:spaRise .9s cubic-bezier(.22,1,.36,1) both}.hero .eyebrow{animation:spaRise .7s .08s both}.hero .intro{animation:spaRise .8s .2s both}.hero .actions{animation:spaRise .8s .3s both}
+@keyframes spaRise{from{opacity:0;transform:translateY(30px);filter:blur(7px)}to{opacity:1;transform:none;filter:blur(0)}}
+.marquee{overflow:hidden;background:#c29a45;color:#0e2219;padding:15px 0;white-space:nowrap}.marquee-track{display:flex;width:max-content;animation:spaMarquee 34s linear infinite}.marquee span{font:400 18px 'Bodoni Moda',Georgia,serif;padding:0 25px}.marquee b{font:400 12px sans-serif;padding-left:25px}@keyframes spaMarquee{to{transform:translateX(-50%)}}
+.quote{background:#1c3025;text-align:center;padding:80px 6%}.quote blockquote{font:400 clamp(32px,5vw,60px)/1.12 'Bodoni Moda',Georgia,serif;max-width:850px;margin:20px auto}.quote em{color:#c29a45;font-style:normal}
+.cursor-dot,.cursor-ring{position:fixed;z-index:90;pointer-events:none;left:0;top:0;transform:translate(-50%,-50%);border-radius:50%;opacity:0}.cursor-dot{width:8px;height:8px;background:#c29a45}.cursor-ring{width:38px;height:38px;border:1px solid #c29a4599;transition:width .25s,height .25s}.cursor-ring.active{width:60px;height:60px}
+@media(hover:hover) and (pointer:fine){body,a,button{cursor:none}.cursor-dot,.cursor-ring{opacity:1}}
+@media(max-width:760px){.hero{min-height:760px}.hero:before{background:linear-gradient(0deg,#0e2219 0%,#0e221980 62%,#0e221940 100%),url("https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=1100&q=85") center/cover}.quote{padding:65px 7%}}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;filter:none}.marquee-track{animation:none}.hero h1,.hero .eyebrow,.hero .intro,.hero .actions{animation:none}}
